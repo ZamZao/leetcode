@@ -47,6 +47,34 @@ class LinkedList {
         this.length--;
     }
     // append at n index
+    appendatNIndex(value,index){
+       
+        if(index===0) this.prepend(value);
+        if(index>=this.length) this.append(value);
+
+
+        const newNode = new NewNode(value);        
+        const leader = this.traverseToIndex(index-1);
+
+        newNode.next = leader.next;
+        leader.next = newNode;
+
+        // const holdingPointer = leader.next;
+        // leader.next = newNode;
+        // newNode.next = holdingPointer;
+
+        this.length++;
+    }
+    traverseToIndex(index){
+        let currentNode = this.head;
+        let counter=0;
+        
+        while(counter!=index){
+            currentNode= currentNode.next;
+            counter++;
+        }
+        return currentNode;
+    }
 
     // print list
     printList(){
@@ -72,6 +100,8 @@ myLinkedList.deleteFirstElement();
 console.log('fifth',myLinkedList.printList());
 myLinkedList.deleteLastElement();
 console.log('sixth',myLinkedList.printList());
-
-
-
+myLinkedList.appendatNIndex(7,1);
+console.log('seventh',myLinkedList.printList());
+console.log(myLinkedList.traverseToIndex(0).value);
+console.log(myLinkedList.traverseToIndex(1).value);
+console.log(myLinkedList.traverseToIndex(2).value);
